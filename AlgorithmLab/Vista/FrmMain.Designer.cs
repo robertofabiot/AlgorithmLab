@@ -176,7 +176,8 @@
             // 
             // panelUserControl
             // 
-            this.panelUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelUserControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panelUserControl.Location = new System.Drawing.Point(253, 63);
             this.panelUserControl.Name = "panelUserControl";
             this.panelUserControl.Size = new System.Drawing.Size(1526, 614);

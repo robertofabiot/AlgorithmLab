@@ -40,7 +40,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -125,9 +124,9 @@
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
             this.label3.Location = new System.Drawing.Point(1047, 96);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 34);
+            this.label3.Size = new System.Drawing.Size(142, 34);
             this.label3.TabIndex = 19;
-            this.label3.Text = "Selection Sort:";
+            this.label3.Text = "Jump Search:";
             // 
             // progressBar1
             // 
@@ -172,27 +171,15 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
             this.label6.Location = new System.Drawing.Point(1047, 316);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(123, 34);
+            this.label6.Size = new System.Drawing.Size(219, 34);
             this.label6.TabIndex = 22;
-            this.label6.Text = "Merge Sort:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
-            this.label7.Location = new System.Drawing.Point(71, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(151, 34);
-            this.label7.TabIndex = 25;
-            this.label7.Text = "Valor a buscar:";
+            this.label6.Text = "Búsqueda Interpolada:";
             // 
             // UCSort
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(71)))));
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.label6);
@@ -226,6 +213,5 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
     }
 }
