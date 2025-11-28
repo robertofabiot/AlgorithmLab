@@ -142,6 +142,9 @@
     <EmbeddedResource Include="Vista\UCRecord.resx">
       <DependentUpon>UCRecord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vista\UCSearch.resx">
+      <DependentUpon>UCSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vista\UCSort.resx">
       <DependentUpon>UCSort.cs</DependentUpon>
     </EmbeddedResource>
