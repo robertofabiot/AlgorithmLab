@@ -31,20 +31,21 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.clbAlgoritmos = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
+            this.clbModoEjecucion = new System.Windows.Forms.CheckedListBox();
+            this.btnIniciarBenchmark = new System.Windows.Forms.Button();
+            this.btnAbortar = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.formsPlot1 = new ScottPlot.WinForms.FormsPlot();
+            this.lblMerge = new System.Windows.Forms.Label();
+            this.pbProgresoMerge = new System.Windows.Forms.ProgressBar();
+            this.formsPlotOrdenamiento = new ScottPlot.WinForms.FormsPlot();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
-            this.button1 = new System.Windows.Forms.Button();
+            this.lblSelection = new System.Windows.Forms.Label();
+            this.pbProgresoSelection = new System.Windows.Forms.ProgressBar();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -70,10 +71,11 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.label1);
-            this.flowLayoutPanel1.Controls.Add(this.checkedListBox1);
+            this.flowLayoutPanel1.Controls.Add(this.clbAlgoritmos);
             this.flowLayoutPanel1.Controls.Add(this.label2);
-            this.flowLayoutPanel1.Controls.Add(this.checkedListBox2);
-            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.clbModoEjecucion);
+            this.flowLayoutPanel1.Controls.Add(this.btnIniciarBenchmark);
+            this.flowLayoutPanel1.Controls.Add(this.btnAbortar);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
@@ -93,21 +95,21 @@
             this.label1.TabIndex = 30;
             this.label1.Text = "Algoritmo:";
             // 
-            // checkedListBox1
+            // clbAlgoritmos
             // 
-            this.checkedListBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(71)))));
-            this.checkedListBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox1.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.checkedListBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
+            this.clbAlgoritmos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(71)))));
+            this.clbAlgoritmos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.clbAlgoritmos.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.clbAlgoritmos.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
+            this.clbAlgoritmos.FormattingEnabled = true;
+            this.clbAlgoritmos.Items.AddRange(new object[] {
             "Selection Sort",
             "Merge Sort"});
-            this.checkedListBox1.Location = new System.Drawing.Point(10, 64);
-            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(10);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(251, 70);
-            this.checkedListBox1.TabIndex = 31;
+            this.clbAlgoritmos.Location = new System.Drawing.Point(10, 64);
+            this.clbAlgoritmos.Margin = new System.Windows.Forms.Padding(10);
+            this.clbAlgoritmos.Name = "clbAlgoritmos";
+            this.clbAlgoritmos.Size = new System.Drawing.Size(251, 70);
+            this.clbAlgoritmos.TabIndex = 31;
             // 
             // label2
             // 
@@ -121,21 +123,57 @@
             this.label2.TabIndex = 32;
             this.label2.Text = "Modo:";
             // 
-            // checkedListBox2
+            // clbModoEjecucion
             // 
-            this.checkedListBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(71)))));
-            this.checkedListBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.checkedListBox2.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.checkedListBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Items.AddRange(new object[] {
+            this.clbModoEjecucion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(70)))), ((int)(((byte)(78)))), ((int)(((byte)(71)))));
+            this.clbModoEjecucion.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.clbModoEjecucion.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.clbModoEjecucion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
+            this.clbModoEjecucion.FormattingEnabled = true;
+            this.clbModoEjecucion.Items.AddRange(new object[] {
             "Gráfico en Vivo (más lento)",
             "Benchmark (máxima velocidad)"});
-            this.checkedListBox2.Location = new System.Drawing.Point(10, 208);
-            this.checkedListBox2.Margin = new System.Windows.Forms.Padding(10);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(334, 70);
-            this.checkedListBox2.TabIndex = 33;
+            this.clbModoEjecucion.Location = new System.Drawing.Point(10, 208);
+            this.clbModoEjecucion.Margin = new System.Windows.Forms.Padding(10);
+            this.clbModoEjecucion.Name = "clbModoEjecucion";
+            this.clbModoEjecucion.Size = new System.Drawing.Size(334, 70);
+            this.clbModoEjecucion.TabIndex = 33;
+            // 
+            // btnIniciarBenchmark
+            // 
+            this.btnIniciarBenchmark.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnIniciarBenchmark.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
+            this.btnIniciarBenchmark.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnIniciarBenchmark.FlatAppearance.BorderSize = 0;
+            this.btnIniciarBenchmark.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnIniciarBenchmark.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.btnIniciarBenchmark.ForeColor = System.Drawing.Color.White;
+            this.btnIniciarBenchmark.Location = new System.Drawing.Point(87, 298);
+            this.btnIniciarBenchmark.Margin = new System.Windows.Forms.Padding(10);
+            this.btnIniciarBenchmark.Name = "btnIniciarBenchmark";
+            this.btnIniciarBenchmark.Size = new System.Drawing.Size(180, 56);
+            this.btnIniciarBenchmark.TabIndex = 34;
+            this.btnIniciarBenchmark.Text = "Iniciar";
+            this.btnIniciarBenchmark.UseVisualStyleBackColor = false;
+            this.btnIniciarBenchmark.Click += new System.EventHandler(this.btnIniciarBenchmark_Click);
+            // 
+            // btnAbortar
+            // 
+            this.btnAbortar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAbortar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
+            this.btnAbortar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAbortar.FlatAppearance.BorderSize = 0;
+            this.btnAbortar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbortar.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.btnAbortar.ForeColor = System.Drawing.Color.White;
+            this.btnAbortar.Location = new System.Drawing.Point(87, 374);
+            this.btnAbortar.Margin = new System.Windows.Forms.Padding(10);
+            this.btnAbortar.Name = "btnAbortar";
+            this.btnAbortar.Size = new System.Drawing.Size(180, 56);
+            this.btnAbortar.TabIndex = 35;
+            this.btnAbortar.Text = "Abortar";
+            this.btnAbortar.UseVisualStyleBackColor = false;
+            this.btnAbortar.Click += new System.EventHandler(this.btnAbortar_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -144,7 +182,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel3, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.formsPlot1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.formsPlotOrdenamiento, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(462, 3);
@@ -159,8 +197,8 @@
             // 
             this.flowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.flowLayoutPanel3.Controls.Add(this.label8);
-            this.flowLayoutPanel3.Controls.Add(this.label4);
-            this.flowLayoutPanel3.Controls.Add(this.progressBar1);
+            this.flowLayoutPanel3.Controls.Add(this.lblMerge);
+            this.flowLayoutPanel3.Controls.Add(this.pbProgresoMerge);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel3.Location = new System.Drawing.Point(536, 371);
@@ -180,42 +218,43 @@
             this.label8.TabIndex = 56;
             this.label8.Text = "Merge Sort";
             // 
-            // label4
+            // lblMerge
             // 
-            this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label4.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Lime;
-            this.label4.Location = new System.Drawing.Point(10, 64);
-            this.label4.Margin = new System.Windows.Forms.Padding(10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(405, 102);
-            this.label4.TabIndex = 57;
-            this.label4.Text = "Tiempo exacto (00:02:15.450)\r\nMemoria Pico: aaa\r\nIntercambios realizados: aaaa";
+            this.lblMerge.AutoSize = true;
+            this.lblMerge.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblMerge.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMerge.ForeColor = System.Drawing.Color.Lime;
+            this.lblMerge.Location = new System.Drawing.Point(10, 64);
+            this.lblMerge.Margin = new System.Windows.Forms.Padding(10);
+            this.lblMerge.Name = "lblMerge";
+            this.lblMerge.Size = new System.Drawing.Size(450, 99);
+            this.lblMerge.TabIndex = 57;
+            this.lblMerge.Text = "Tiempo exacto (00:02:15.450)\r\nMemoria Pico: aaa\r\nIntercambios realizados: aaaa";
             // 
-            // progressBar1
+            // pbProgresoMerge
             // 
-            this.progressBar1.Location = new System.Drawing.Point(10, 186);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(10);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(405, 23);
-            this.progressBar1.TabIndex = 56;
+            this.pbProgresoMerge.Location = new System.Drawing.Point(10, 183);
+            this.pbProgresoMerge.Margin = new System.Windows.Forms.Padding(10);
+            this.pbProgresoMerge.Name = "pbProgresoMerge";
+            this.pbProgresoMerge.Size = new System.Drawing.Size(405, 23);
+            this.pbProgresoMerge.TabIndex = 56;
             // 
-            // formsPlot1
+            // formsPlotOrdenamiento
             // 
-            this.tableLayoutPanel2.SetColumnSpan(this.formsPlot1, 2);
-            this.formsPlot1.DisplayScale = 0F;
-            this.formsPlot1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlot1.Location = new System.Drawing.Point(3, 3);
-            this.formsPlot1.Name = "formsPlot1";
-            this.formsPlot1.Size = new System.Drawing.Size(1061, 362);
-            this.formsPlot1.TabIndex = 31;
+            this.tableLayoutPanel2.SetColumnSpan(this.formsPlotOrdenamiento, 2);
+            this.formsPlotOrdenamiento.DisplayScale = 0F;
+            this.formsPlotOrdenamiento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlotOrdenamiento.Location = new System.Drawing.Point(3, 3);
+            this.formsPlotOrdenamiento.Name = "formsPlotOrdenamiento";
+            this.formsPlotOrdenamiento.Size = new System.Drawing.Size(1061, 362);
+            this.formsPlotOrdenamiento.TabIndex = 31;
             // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.flowLayoutPanel2.Controls.Add(this.label7);
-            this.flowLayoutPanel2.Controls.Add(this.label5);
-            this.flowLayoutPanel2.Controls.Add(this.progressBar2);
+            this.flowLayoutPanel2.Controls.Add(this.lblSelection);
+            this.flowLayoutPanel2.Controls.Add(this.pbProgresoSelection);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 371);
@@ -235,43 +274,27 @@
             this.label7.TabIndex = 35;
             this.label7.Text = "Selection Sort";
             // 
-            // label5
+            // lblSelection
             // 
-            this.label5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label5.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Lime;
-            this.label5.Location = new System.Drawing.Point(10, 64);
-            this.label5.Margin = new System.Windows.Forms.Padding(10);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(405, 102);
-            this.label5.TabIndex = 54;
-            this.label5.Text = "Tiempo exacto (00:02:15.450)\r\nMemoria Pico: aaa\r\nIntercambios realizados: aaaa";
+            this.lblSelection.AutoSize = true;
+            this.lblSelection.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblSelection.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelection.ForeColor = System.Drawing.Color.Lime;
+            this.lblSelection.Location = new System.Drawing.Point(10, 64);
+            this.lblSelection.Margin = new System.Windows.Forms.Padding(10);
+            this.lblSelection.Name = "lblSelection";
+            this.lblSelection.Size = new System.Drawing.Size(450, 99);
+            this.lblSelection.TabIndex = 54;
+            this.lblSelection.Text = "Tiempo exacto (00:02:15.450)\r\nMemoria Pico: aaa\r\nIntercambios realizados: aaaa";
             // 
-            // progressBar2
+            // pbProgresoSelection
             // 
-            this.progressBar2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.progressBar2.Location = new System.Drawing.Point(10, 186);
-            this.progressBar2.Margin = new System.Windows.Forms.Padding(10);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(405, 23);
-            this.progressBar2.TabIndex = 55;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(87, 298);
-            this.button1.Margin = new System.Windows.Forms.Padding(10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 56);
-            this.button1.TabIndex = 34;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.pbProgresoSelection.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pbProgresoSelection.Location = new System.Drawing.Point(32, 183);
+            this.pbProgresoSelection.Margin = new System.Windows.Forms.Padding(10);
+            this.pbProgresoSelection.Name = "pbProgresoSelection";
+            this.pbProgresoSelection.Size = new System.Drawing.Size(405, 23);
+            this.pbProgresoSelection.TabIndex = 55;
             // 
             // UCSort
             // 
@@ -298,19 +321,20 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox clbAlgoritmos;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
+        private System.Windows.Forms.CheckedListBox clbModoEjecucion;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private ScottPlot.WinForms.FormsPlot formsPlot1;
+        private ScottPlot.WinForms.FormsPlot formsPlotOrdenamiento;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.Label lblSelection;
+        private System.Windows.Forms.ProgressBar pbProgresoSelection;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label lblMerge;
+        private System.Windows.Forms.ProgressBar pbProgresoMerge;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnIniciarBenchmark;
+        private System.Windows.Forms.Button btnAbortar;
     }
 }

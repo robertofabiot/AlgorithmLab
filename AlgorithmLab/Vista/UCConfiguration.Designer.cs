@@ -31,14 +31,14 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbTipoDato = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbTamanoMuestra = new System.Windows.Forms.ComboBox();
+            this.btnGenerarDatos = new System.Windows.Forms.Button();
+            this.dgvVistaPrevia = new System.Windows.Forms.DataGridView();
+            this.cmbDistribucion = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaPrevia)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -50,12 +50,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox2, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cmbTipoDato, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridView1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.comboBox3, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmbTamanoMuestra, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnGenerarDatos, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dgvVistaPrevia, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.cmbDistribucion, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -92,15 +92,19 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Tipo de datos:";
             // 
-            // comboBox2
+            // cmbTipoDato
             // 
-            this.comboBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox2.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(462, 211);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(453, 41);
-            this.comboBox2.TabIndex = 11;
+            this.cmbTipoDato.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTipoDato.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.cmbTipoDato.FormattingEnabled = true;
+            this.cmbTipoDato.Items.AddRange(new object[] {
+            "Entero",
+            "Decimal",
+            "Texto"});
+            this.cmbTipoDato.Location = new System.Drawing.Point(462, 211);
+            this.cmbTipoDato.Name = "cmbTipoDato";
+            this.cmbTipoDato.Size = new System.Drawing.Size(453, 41);
+            this.cmbTipoDato.TabIndex = 11;
             // 
             // label1
             // 
@@ -114,57 +118,67 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Tamaño de la muestra:";
             // 
-            // comboBox1
+            // cmbTamanoMuestra
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(462, 366);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(453, 41);
-            this.comboBox1.TabIndex = 9;
+            this.cmbTamanoMuestra.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbTamanoMuestra.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.cmbTamanoMuestra.FormattingEnabled = true;
+            this.cmbTamanoMuestra.Items.AddRange(new object[] {
+            "500000",
+            "1000000",
+            "5000000"});
+            this.cmbTamanoMuestra.Location = new System.Drawing.Point(462, 366);
+            this.cmbTamanoMuestra.Name = "cmbTamanoMuestra";
+            this.cmbTamanoMuestra.Size = new System.Drawing.Size(453, 41);
+            this.cmbTamanoMuestra.TabIndex = 9;
             // 
-            // button1
+            // btnGenerarDatos
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(598, 514);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(180, 56);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Generar";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnGenerarDatos.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnGenerarDatos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
+            this.btnGenerarDatos.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnGenerarDatos.FlatAppearance.BorderSize = 0;
+            this.btnGenerarDatos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarDatos.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.btnGenerarDatos.ForeColor = System.Drawing.Color.White;
+            this.btnGenerarDatos.Location = new System.Drawing.Point(598, 514);
+            this.btnGenerarDatos.Name = "btnGenerarDatos";
+            this.btnGenerarDatos.Size = new System.Drawing.Size(180, 56);
+            this.btnGenerarDatos.TabIndex = 14;
+            this.btnGenerarDatos.Text = "Generar";
+            this.btnGenerarDatos.UseVisualStyleBackColor = false;
+            this.btnGenerarDatos.Click += new System.EventHandler(this.btnGenerarDatos_Click);
             // 
-            // dataGridView1
+            // dgvVistaPrevia
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1000, 3);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.tableLayoutPanel1.SetRowSpan(this.dataGridView1, 3);
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(449, 459);
-            this.dataGridView1.TabIndex = 15;
-            this.dataGridView1.VirtualMode = true;
+            this.dgvVistaPrevia.AllowUserToAddRows = false;
+            this.dgvVistaPrevia.AllowUserToDeleteRows = false;
+            this.dgvVistaPrevia.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.dgvVistaPrevia.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVistaPrevia.Location = new System.Drawing.Point(1000, 3);
+            this.dgvVistaPrevia.Name = "dgvVistaPrevia";
+            this.dgvVistaPrevia.ReadOnly = true;
+            this.dgvVistaPrevia.RowHeadersWidth = 51;
+            this.tableLayoutPanel1.SetRowSpan(this.dgvVistaPrevia, 3);
+            this.dgvVistaPrevia.RowTemplate.Height = 24;
+            this.dgvVistaPrevia.Size = new System.Drawing.Size(449, 459);
+            this.dgvVistaPrevia.TabIndex = 15;
+            this.dgvVistaPrevia.VirtualMode = true;
+            this.dgvVistaPrevia.CellValueNeeded += new System.Windows.Forms.DataGridViewCellValueEventHandler(this.DgvVistaPrevia_CellValueNeeded);
             // 
-            // comboBox3
+            // cmbDistribucion
             // 
-            this.comboBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox3.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(462, 56);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(453, 41);
-            this.comboBox3.TabIndex = 13;
+            this.cmbDistribucion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.cmbDistribucion.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.cmbDistribucion.FormattingEnabled = true;
+            this.cmbDistribucion.Items.AddRange(new object[] {
+            "Aleatorio",
+            "Ordenado",
+            "Inverso"});
+            this.cmbDistribucion.Location = new System.Drawing.Point(462, 56);
+            this.cmbDistribucion.Name = "cmbDistribucion";
+            this.cmbDistribucion.Size = new System.Drawing.Size(453, 41);
+            this.cmbDistribucion.TabIndex = 13;
             // 
             // UCConfiguration
             // 
@@ -176,7 +190,7 @@
             this.Size = new System.Drawing.Size(1532, 620);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVistaPrevia)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -184,13 +198,13 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Button btnGenerarDatos;
+        private System.Windows.Forms.ComboBox cmbDistribucion;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbTipoDato;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbTamanoMuestra;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvVistaPrevia;
     }
 }
