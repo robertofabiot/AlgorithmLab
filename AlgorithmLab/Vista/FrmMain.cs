@@ -38,14 +38,14 @@ namespace AlgorithmLab
         }
         private void SelectBtn(Button btnSelected)
         {
-            btnSelected.BackColor = Color.FromArgb(150, 230, 179);
+            //btnSelected.BackColor = Color.FromArgb(150, 230, 179);
             btnSelected.Enabled = false;
             foreach (var button in navigationButtons.Where(b => b != btnSelected))
                 UnselectBtn(button);
         }
         private void UnselectBtn(Button btnUnselected)
         {
-            btnUnselected.BackColor = Color.FromArgb(86, 130, 89);
+            //btnUnselected.BackColor = Color.FromArgb(86, 130, 89);
             btnUnselected.Enabled = true;
         }
         private void btnConfiguration_Click(object sender, EventArgs e)
@@ -71,6 +71,20 @@ namespace AlgorithmLab
             SelectBtn(btnRecord);
             var viewConfiguration = new UCRecord();
             ChangeView(viewConfiguration);
+        }
+        private void Button_MouseEnter(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            btn.BackColor = Color.FromArgb(86, 130, 89);
+        }
+        private void Button_MouseLeave(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn == null) return;
+
+            btn.BackColor = Color.Transparent;
         }
         #endregion
     }

@@ -15,6 +15,7 @@ namespace AlgorithmLab.Vista
         public UCConfiguration()
         {
             InitializeComponent();
+                  
         }
 
         private void dataGridView1_CellValueNeeded(object sender, DataGridViewCellValueEventArgs e)
