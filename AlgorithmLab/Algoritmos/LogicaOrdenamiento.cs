@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AlgorithmLab.Algoritmos
 {
     public static class LogicaOrdenamiento
     {
-        public static long ContadorIntercambios; // Contador global simple
+        public static long ContadorIntercambios;
 
-        #region Selection Sort
+        // --- SELECTION SORT (Sin cambios, solo asegúrate que esté así) ---
         public static void SelectionSort<T>(T[] array) where T : IComparable
         {
             ContadorIntercambios = 0;
@@ -18,70 +17,76 @@ namespace AlgorithmLab.Algoritmos
                 for (int j = i + 1; j < n; j++)
                 {
                     if (array[j].CompareTo(array[min_idx]) < 0)
-                    {
                         min_idx = j;
-                    }
                 }
-                // Swap
-                T temp = array[min_idx];
-                array[min_idx] = array[i];
-                array[i] = temp;
-                ContadorIntercambios++;
+
+                if (min_idx != i) // Pequeña optimización: solo intercambiar si es necesario
+                {
+                    T temp = array[min_idx];
+                    array[min_idx] = array[i];
+                    array[i] = temp;
+                    ContadorIntercambios++;
+                }
             }
         }
-        #endregion
 
-        #region Merge Sort
+        // --- MERGE SORT OPTIMIZADO (Adiós Crasheos) ---
         public static void MergeSort<T>(T[] array) where T : IComparable
         {
             ContadorIntercambios = 0;
-            MergeSortRecursivo(array, 0, array.Length - 1);
+            if (array.Length <= 1) return;
+
+            // Creamos el array auxiliar UNA SOLA VEZ aquí fuera
+            T[] auxiliar = new T[array.Length];
+            MergeSortRecursivo(array, auxiliar, 0, array.Length - 1);
         }
 
-        private static void MergeSortRecursivo<T>(T[] array, int left, int right) where T : IComparable
+        private static void MergeSortRecursivo<T>(T[] array, T[] auxiliar, int left, int right) where T : IComparable
         {
             if (left < right)
             {
-                int middle = left + (right - left) / 2;
-                MergeSortRecursivo(array, left, middle);
-                MergeSortRecursivo(array, middle + 1, right);
-                Merge(array, left, middle, right);
+                int mid = left + (right - left) / 2;
+                MergeSortRecursivo(array, auxiliar, left, mid);
+                MergeSortRecursivo(array, auxiliar, mid + 1, right);
+                Merge(array, auxiliar, left, mid, right);
             }
         }
 
-        private static void Merge<T>(T[] array, int left, int middle, int right) where T : IComparable
+        private static void Merge<T>(T[] array, T[] auxiliar, int left, int mid, int right) where T : IComparable
         {
-            int n1 = middle - left + 1;
-            int n2 = right - middle;
-
-            T[] L = new T[n1];
-            T[] R = new T[n2];
-
-            for (int i = 0; i < n1; i++) L[i] = array[left + i];
-            for (int j = 0; j < n2; j++) R[j] = array[middle + 1 + j];
-
-            int k = left;
-            int x = 0, y = 0;
-
-            while (x < n1 && y < n2)
+            // Copiamos a auxiliar solo el segmento necesario
+            for (int i = left; i <= right; i++)
             {
-                if (L[x].CompareTo(R[y]) <= 0)
+                auxiliar[i] = array[i];
+            }
+
+            int i_left = left;
+            int i_right = mid + 1;
+            int current = left;
+
+            while (i_left <= mid && i_right <= right)
+            {
+                ContadorIntercambios++;
+                // Comparamos desde el auxiliar, escribimos en el original
+                if (auxiliar[i_left].CompareTo(auxiliar[i_right]) <= 0)
                 {
-                    array[k] = L[x];
-                    x++;
+                    array[current] = auxiliar[i_left];
+                    i_left++;
                 }
                 else
                 {
-                    array[k] = R[y];
-                    y++;
+                    array[current] = auxiliar[i_right];
+                    i_right++;
                 }
-                k++;
-                ContadorIntercambios++;
+                current++;
             }
 
-            while (x < n1) { array[k] = L[x]; x++; k++; }
-            while (y < n2) { array[k] = R[y]; y++; k++; }
+            // Copiar el resto del lado izquierdo (el derecho ya está en su sitio)
+            int remaining = mid - i_left;
+            for (int i = 0; i <= remaining; i++)
+            {
+                array[current + i] = auxiliar[i_left + i];
+            }
         }
-        #endregion
     }
 }

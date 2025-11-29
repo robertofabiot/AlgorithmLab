@@ -8,35 +8,33 @@ namespace AlgorithmLab.Controlador
 {
     public class OrdenamientoController
     {
-        // Métodos granulares para control total desde la Vista
-
-        public async Task<RegistroBenchmark> EjecutarSelectionSort(IComparable[] datos)
+        // Añadimos el booleano 'actualizarContexto'
+        public async Task<RegistroBenchmark> EjecutarSelectionSort(IComparable[] datos, bool actualizarContexto)
         {
-            return await EjecutarAlgoritmo("Selection Sort", datos, LogicaOrdenamiento.SelectionSort);
+            return await EjecutarAlgoritmo("Selection Sort", datos, LogicaOrdenamiento.SelectionSort, actualizarContexto);
         }
 
-        public async Task<RegistroBenchmark> EjecutarMergeSort(IComparable[] datos)
+        public async Task<RegistroBenchmark> EjecutarMergeSort(IComparable[] datos, bool actualizarContexto)
         {
-            return await EjecutarAlgoritmo("Merge Sort", datos, LogicaOrdenamiento.MergeSort);
+            return await EjecutarAlgoritmo("Merge Sort", datos, LogicaOrdenamiento.MergeSort, actualizarContexto);
         }
 
-        // Método genérico privado para no repetir código
-        private async Task<RegistroBenchmark> EjecutarAlgoritmo(string nombre, IComparable[] datosOriginales, Action<IComparable[]> algoritmo)
+        private async Task<RegistroBenchmark> EjecutarAlgoritmo(string nombre, IComparable[] datosOriginales, Action<IComparable[]> algoritmo, bool actualizarContexto)
         {
-            // 1. Limpieza agresiva antes de empezar
+            // 1. Limpieza de memoria
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
 
             long memoriaInicial = Process.GetCurrentProcess().PrivateMemorySize64;
 
-            // 2. Clonar datos (El clon consume RAM, eso se reflejará en el gráfico, ¡es correcto!)
+            // 2. Clonar (Para medir sobre una copia limpia)
             IComparable[] copia = (IComparable[])datosOriginales.Clone();
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
-            // 3. Ejecutar (La Vista estará monitoreando la RAM mientras esto ocurre en otro hilo)
+            // 3. Ejecutar Algoritmo
             await Task.Run(() => algoritmo(copia));
 
             sw.Stop();
@@ -44,7 +42,18 @@ namespace AlgorithmLab.Controlador
             long memoriaFinal = Process.GetCurrentProcess().PrivateMemorySize64;
             long pico = Math.Max(0, memoriaFinal - memoriaInicial);
 
-            // 4. Crear Registro
+            // 4. ACTUALIZACIÓN DEL CONTEXTO (Aquí está la magia)
+            if (actualizarContexto)
+            {
+                // Reemplazamos los datos globales desordenados por los ordenados
+                ContextoGlobal.DatosActuales.Datos = copia;
+                ContextoGlobal.DatosActuales.EstaOrdenado = true;
+
+                // Opcional: Actualizar el tipo de distribución para que UCConfiguration lo sepa
+                // No cambiamos "TipoDato", solo el estado.
+            }
+
+            // 5. Crear Registro
             var registro = new RegistroBenchmark
             {
                 TipoOperacion = "Ordenamiento",
@@ -58,9 +67,7 @@ namespace AlgorithmLab.Controlador
                 Fecha = DateTime.Now
             };
 
-            // Guardar en historial
             ContextoGlobal.HistorialRegistros.Add(registro);
-
             return registro;
         }
 

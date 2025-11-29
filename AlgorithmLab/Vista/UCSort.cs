@@ -1,10 +1,10 @@
 ﻿using AlgorithmLab.Controlador;
 using AlgorithmLab.Modelo;
-using ScottPlot; // Necesario para ScottPlot 5
+using ScottPlot; // Asegúrate de tener ScottPlot 5 instalado
 using System;
 using System.Collections.Generic;
-using System.Diagnostics; // Para Stopwatch
-using System.Linq; // Para métodos de listas
+using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -52,15 +52,11 @@ namespace AlgorithmLab.Vista
             formsPlotOrdenamiento.Plot.Axes.Left.Label.Text = "RAM (MB)";
 
             // --- CORRECCIÓN DE ESTILO PARA SCOTTPLOT 5 ---
-            // ScottPlot 5 no tiene .Style(), se hace manualmente así para modo oscuro:
-
-            // Fondo del control y del gráfico
-            ScottPlot.Color colorFondo = ScottPlot.Color.FromHex("#464E47"); // Tu gris oscuro
+            ScottPlot.Color colorFondo = ScottPlot.Color.FromHex("#464E47");
             formsPlotOrdenamiento.Plot.FigureBackground.Color = colorFondo;
             formsPlotOrdenamiento.Plot.DataBackground.Color = colorFondo;
 
-            // Colores de los ejes y rejillas
-            ScottPlot.Color colorTexto = ScottPlot.Color.FromHex("#F1FFFA"); // Tu blanco menta
+            ScottPlot.Color colorTexto = ScottPlot.Color.FromHex("#F1FFFA");
             formsPlotOrdenamiento.Plot.Axes.Color(colorTexto);
             formsPlotOrdenamiento.Plot.Grid.MajorLineColor = ScottPlot.Color.FromHex("#606060");
 
@@ -70,15 +66,14 @@ namespace AlgorithmLab.Vista
         private void ConfigurarTimer()
         {
             _timerMonitor = new System.Windows.Forms.Timer();
-            _timerMonitor.Interval = 100; // Muestrear cada 100ms (0.1 seg)
+            _timerMonitor.Interval = 100; // Muestrear cada 100ms
             _timerMonitor.Tick += TimerMonitor_Tick;
             _cronometroVisual = new Stopwatch();
         }
 
-        // Este evento se dispara 10 veces por segundo para actualizar el gráfico
         private void TimerMonitor_Tick(object sender, EventArgs e)
         {
-            // 1. Medir Memoria Actual
+            // 1. Medir Memoria Actual (RAM privada asignada al proceso)
             long bytes = Process.GetCurrentProcess().PrivateMemorySize64;
             double megabytes = bytes / 1024.0 / 1024.0;
             double segundos = _cronometroVisual.Elapsed.TotalSeconds;
@@ -101,18 +96,13 @@ namespace AlgorithmLab.Vista
 
         private void ActualizarDibujoGrafico()
         {
-            // Limpiamos los "Plottables" (líneas) anteriores para no dibujar encima infinitamente
             formsPlotOrdenamiento.Plot.Clear();
 
             // --- DIBUJAR LÍNEA ROJA (SELECTION) ---
             if (_tiempoX_Selection.Count > 0)
             {
                 var lineaSel = formsPlotOrdenamiento.Plot.Add.Scatter(_tiempoX_Selection.ToArray(), _memoriaY_Selection.ToArray());
-
-                // CORRECCIÓN DE COLOR (Ambigüedad): Usamos ScottPlot.Color explícitamente
                 lineaSel.Color = ScottPlot.Color.FromHex("#FF5733");
-
-                // CORRECCIÓN DE OBSOLETO: .Label ahora es .LegendText
                 lineaSel.LegendText = "Selection Sort";
                 lineaSel.LineWidth = 2;
             }
@@ -121,14 +111,13 @@ namespace AlgorithmLab.Vista
             if (_tiempoX_Merge.Count > 0)
             {
                 var lineaMerge = formsPlotOrdenamiento.Plot.Add.Scatter(_tiempoX_Merge.ToArray(), _memoriaY_Merge.ToArray());
-
                 lineaMerge.Color = ScottPlot.Color.FromHex("#33FF57");
                 lineaMerge.LegendText = "Merge Sort";
                 lineaMerge.LineWidth = 2;
             }
 
-            formsPlotOrdenamiento.Plot.ShowLegend(); // Mostrar leyenda si hay datos
-            formsPlotOrdenamiento.Plot.Axes.AutoScale(); // Ajustar zoom
+            formsPlotOrdenamiento.Plot.ShowLegend();
+            formsPlotOrdenamiento.Plot.Axes.AutoScale();
             formsPlotOrdenamiento.Refresh();
         }
 
@@ -155,41 +144,62 @@ namespace AlgorithmLab.Vista
 
             try
             {
+                // Definimos quién actualiza el contexto global (solo el último en ejecutarse)
+                bool actualizarConSelection = usarSelection && !usarMerge;
+                bool actualizarConMerge = usarMerge; // Merge siempre es último si se selecciona
+
                 // --- EJECUCIÓN SELECTION SORT ---
                 if (usarSelection)
                 {
+                    // Animación Marquee
+                    pbProgresoSelection.Style = ProgressBarStyle.Marquee;
+
                     _midiendoSelection = true;
                     _cronometroVisual.Restart();
+                    if (modoGrafico) _timerMonitor.Start();
 
-                    if (modoGrafico) _timerMonitor.Start(); // Solo monitorear si es gráfico en vivo
-
-                    // Ejecutar algoritmo
-                    var resultadoSel = await _controller.EjecutarSelectionSort(ContextoGlobal.DatosActuales.Datos);
+                    // Ejecutar algoritmo (pasando flag de actualizar)
+                    var resultadoSel = await _controller.EjecutarSelectionSort(ContextoGlobal.DatosActuales.Datos, actualizarConSelection);
 
                     _timerMonitor.Stop();
                     _midiendoSelection = false;
 
-                    // Si no fue modo gráfico, al menos graficamos el punto final o una barra
+                    // Corrección Memoria Pico: Usar el máximo real capturado por la gráfica
+                    if (_memoriaY_Selection.Count > 0)
+                    {
+                        double maxMemoriaMB = _memoriaY_Selection.Max();
+                        resultadoSel.MemoriaPicoBytes = (long)(maxMemoriaMB * 1024 * 1024);
+                    }
+
                     if (!modoGrafico) GraficarBarra(0, resultadoSel.TiempoMilisegundos, "Selection", "#FF5733");
 
                     MostrarResultadosSelection(resultadoSel);
                 }
 
-                // Pausa para limpiar memoria
-                await Task.Delay(500);
+                await Task.Delay(1000); // Pausa para estabilizar memoria
 
                 // --- EJECUCIÓN MERGE SORT ---
                 if (usarMerge)
                 {
+                    // Animación Marquee
+                    pbProgresoMerge.Style = ProgressBarStyle.Marquee;
+
                     _midiendoMerge = true;
                     _cronometroVisual.Restart();
-
                     if (modoGrafico) _timerMonitor.Start();
 
-                    var resultadoMerge = await _controller.EjecutarMergeSort(ContextoGlobal.DatosActuales.Datos);
+                    // Ejecutar algoritmo (pasando flag de actualizar)
+                    var resultadoMerge = await _controller.EjecutarMergeSort(ContextoGlobal.DatosActuales.Datos, actualizarConMerge);
 
                     _timerMonitor.Stop();
                     _midiendoMerge = false;
+
+                    // Corrección Memoria Pico
+                    if (_memoriaY_Merge.Count > 0)
+                    {
+                        double maxMemoriaMB = _memoriaY_Merge.Max();
+                        resultadoMerge.MemoriaPicoBytes = (long)(maxMemoriaMB * 1024 * 1024);
+                    }
 
                     if (!modoGrafico) GraficarBarra(1, resultadoMerge.TiempoMilisegundos, "Merge", "#33FF57");
 
@@ -197,7 +207,7 @@ namespace AlgorithmLab.Vista
                 }
 
                 _controller.GuardarCambios();
-                MessageBox.Show("Proceso terminado.");
+                MessageBox.Show("Proceso terminado.\nDatos actualizados y ordenados en memoria.");
             }
             catch (Exception ex)
             {
@@ -208,6 +218,9 @@ namespace AlgorithmLab.Vista
             {
                 btnIniciarBenchmark.Enabled = true;
                 btnAbortar.Enabled = false;
+                // Detener animaciones pase lo que pase
+                pbProgresoSelection.Style = ProgressBarStyle.Blocks;
+                pbProgresoMerge.Style = ProgressBarStyle.Blocks;
             }
         }
 
@@ -215,7 +228,7 @@ namespace AlgorithmLab.Vista
         {
             // Método auxiliar para cuando NO es gráfico en vivo (Modo Benchmark)
             var bar = formsPlotOrdenamiento.Plot.Add.Bar(position: pos, value: valor);
-            bar.LegendText = nombre; // Nota: En Barras a veces sigue siendo Label o LegendText dependiendo de la subversión, prueba LegendText si falla
+            bar.LegendText = nombre;
             bar.Color = ScottPlot.Color.FromHex(hexColor);
             formsPlotOrdenamiento.Plot.Axes.AutoScale();
             formsPlotOrdenamiento.Refresh();
@@ -226,6 +239,8 @@ namespace AlgorithmLab.Vista
             lblSelection.Text = $"Tiempo: {r.TiempoEjecucion}\n" +
                                 $"Memoria Pico: {r.MemoriaPicoBytes / 1024.0 / 1024.0:F2} MB\n" +
                                 $"Intercambios: {r.Iteraciones:N0}";
+
+            pbProgresoSelection.Style = ProgressBarStyle.Blocks; // Detener marquee
             pbProgresoSelection.Value = 100;
         }
 
@@ -234,6 +249,8 @@ namespace AlgorithmLab.Vista
             lblMerge.Text = $"Tiempo: {r.TiempoEjecucion}\n" +
                             $"Memoria Pico: {r.MemoriaPicoBytes / 1024.0 / 1024.0:F2} MB\n" +
                             $"Iteraciones: {r.Iteraciones:N0}";
+
+            pbProgresoMerge.Style = ProgressBarStyle.Blocks; // Detener marquee
             pbProgresoMerge.Value = 100;
         }
 
@@ -243,6 +260,8 @@ namespace AlgorithmLab.Vista
             lblMerge.Text = "Pendiente...";
             pbProgresoSelection.Value = 0;
             pbProgresoMerge.Value = 0;
+            pbProgresoSelection.Style = ProgressBarStyle.Blocks;
+            pbProgresoMerge.Style = ProgressBarStyle.Blocks;
         }
 
         private void btnAbortar_Click(object sender, EventArgs e)

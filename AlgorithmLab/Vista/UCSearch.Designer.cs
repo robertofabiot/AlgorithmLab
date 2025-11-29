@@ -39,17 +39,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.clbModoEjecucion = new System.Windows.Forms.CheckedListBox();
             this.btnIniciarBusqueda = new System.Windows.Forms.Button();
+            this.btnAbortar = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.lblJump = new System.Windows.Forms.Label();
             this.pbProgresoJump = new System.Windows.Forms.ProgressBar();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
             this.pbProgresoInterpolada = new System.Windows.Forms.ProgressBar();
-            this.formsPlotBusqueda = new ScottPlot.WinForms.FormsPlot();
-            this.btnAbortar = new System.Windows.Forms.Button();
             this.lblInterpolada = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.formsPlotBusqueda = new ScottPlot.WinForms.FormsPlot();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -189,15 +189,36 @@
             this.btnIniciarBusqueda.TabIndex = 60;
             this.btnIniciarBusqueda.Text = "Iniciar";
             this.btnIniciarBusqueda.UseVisualStyleBackColor = false;
+            this.btnIniciarBusqueda.Click += new System.EventHandler(this.btnIniciarBusqueda_Click);
+            // 
+            // btnAbortar
+            // 
+            this.btnAbortar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAbortar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
+            this.btnAbortar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAbortar.FlatAppearance.BorderSize = 0;
+            this.btnAbortar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbortar.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
+            this.btnAbortar.ForeColor = System.Drawing.Color.White;
+            this.btnAbortar.Location = new System.Drawing.Point(110, 488);
+            this.btnAbortar.Margin = new System.Windows.Forms.Padding(10);
+            this.btnAbortar.Name = "btnAbortar";
+            this.btnAbortar.Size = new System.Drawing.Size(180, 56);
+            this.btnAbortar.TabIndex = 61;
+            this.btnAbortar.Text = "Abortar";
+            this.btnAbortar.UseVisualStyleBackColor = false;
+            this.btnAbortar.Click += new System.EventHandler(this.btnAbortar_Click);
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel3, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.formsPlotBusqueda, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.formsPlotBusqueda, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel3, 2, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(462, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -211,6 +232,7 @@
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tableLayoutPanel2.SetColumnSpan(this.flowLayoutPanel2, 2);
             this.flowLayoutPanel2.Controls.Add(this.label3);
             this.flowLayoutPanel2.Controls.Add(this.lblJump);
             this.flowLayoutPanel2.Controls.Add(this.pbProgresoJump);
@@ -218,7 +240,7 @@
             this.flowLayoutPanel2.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 371);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(527, 240);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(526, 240);
             this.flowLayoutPanel2.TabIndex = 33;
             // 
             // label3
@@ -256,31 +278,6 @@
             this.pbProgresoJump.Size = new System.Drawing.Size(405, 23);
             this.pbProgresoJump.TabIndex = 55;
             // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.flowLayoutPanel3.Controls.Add(this.label4);
-            this.flowLayoutPanel3.Controls.Add(this.lblInterpolada);
-            this.flowLayoutPanel3.Controls.Add(this.pbProgresoInterpolada);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(536, 371);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(528, 240);
-            this.flowLayoutPanel3.TabIndex = 56;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
-            this.label4.Location = new System.Drawing.Point(10, 10);
-            this.label4.Margin = new System.Windows.Forms.Padding(10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(214, 34);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Búsqueda Interpolada";
-            // 
             // pbProgresoInterpolada
             // 
             this.pbProgresoInterpolada.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -289,33 +286,6 @@
             this.pbProgresoInterpolada.Name = "pbProgresoInterpolada";
             this.pbProgresoInterpolada.Size = new System.Drawing.Size(405, 23);
             this.pbProgresoInterpolada.TabIndex = 55;
-            // 
-            // formsPlotBusqueda
-            // 
-            this.tableLayoutPanel2.SetColumnSpan(this.formsPlotBusqueda, 2);
-            this.formsPlotBusqueda.DisplayScale = 0F;
-            this.formsPlotBusqueda.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlotBusqueda.Location = new System.Drawing.Point(3, 3);
-            this.formsPlotBusqueda.Name = "formsPlotBusqueda";
-            this.formsPlotBusqueda.Size = new System.Drawing.Size(1061, 362);
-            this.formsPlotBusqueda.TabIndex = 56;
-            // 
-            // btnAbortar
-            // 
-            this.btnAbortar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAbortar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(130)))), ((int)(((byte)(89)))));
-            this.btnAbortar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAbortar.FlatAppearance.BorderSize = 0;
-            this.btnAbortar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAbortar.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F);
-            this.btnAbortar.ForeColor = System.Drawing.Color.White;
-            this.btnAbortar.Location = new System.Drawing.Point(110, 488);
-            this.btnAbortar.Margin = new System.Windows.Forms.Padding(10);
-            this.btnAbortar.Name = "btnAbortar";
-            this.btnAbortar.Size = new System.Drawing.Size(180, 56);
-            this.btnAbortar.TabIndex = 61;
-            this.btnAbortar.Text = "Abortar";
-            this.btnAbortar.UseVisualStyleBackColor = false;
             // 
             // lblInterpolada
             // 
@@ -330,6 +300,41 @@
             this.lblInterpolada.TabIndex = 56;
             this.lblInterpolada.Text = "Tiempo exacto (00:02:15.450)\r\nMemoria Pico: aaa\r\nSaltos realizados: aaa\r\nÍndice e" +
     "ncontrado: aa";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Bahnschrift Condensed", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(241)))), ((int)(((byte)(255)))), ((int)(((byte)(250)))));
+            this.label4.Location = new System.Drawing.Point(10, 10);
+            this.label4.Margin = new System.Windows.Forms.Padding(10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(214, 34);
+            this.label4.TabIndex = 35;
+            this.label4.Text = "Búsqueda Interpolada";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tableLayoutPanel2.SetColumnSpan(this.flowLayoutPanel3, 2);
+            this.flowLayoutPanel3.Controls.Add(this.label4);
+            this.flowLayoutPanel3.Controls.Add(this.lblInterpolada);
+            this.flowLayoutPanel3.Controls.Add(this.pbProgresoInterpolada);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(535, 371);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(529, 240);
+            this.flowLayoutPanel3.TabIndex = 56;
+            // 
+            // formsPlotBusqueda
+            // 
+            this.tableLayoutPanel2.SetColumnSpan(this.formsPlotBusqueda, 2);
+            this.formsPlotBusqueda.DisplayScale = 0F;
+            this.formsPlotBusqueda.Location = new System.Drawing.Point(269, 3);
+            this.formsPlotBusqueda.Name = "formsPlotBusqueda";
+            this.formsPlotBusqueda.Size = new System.Drawing.Size(526, 362);
+            this.formsPlotBusqueda.TabIndex = 58;
             // 
             // UCSearch
             // 
@@ -367,11 +372,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblJump;
         private System.Windows.Forms.ProgressBar pbProgresoJump;
+        private System.Windows.Forms.Button btnAbortar;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblInterpolada;
         private System.Windows.Forms.ProgressBar pbProgresoInterpolada;
         private ScottPlot.WinForms.FormsPlot formsPlotBusqueda;
-        private System.Windows.Forms.Button btnAbortar;
-        private System.Windows.Forms.Label lblInterpolada;
     }
 }
