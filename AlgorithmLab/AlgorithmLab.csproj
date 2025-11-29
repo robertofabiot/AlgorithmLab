@@ -119,6 +119,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algoritmos\LogicaOrdenamiento.cs" />
     <Compile Include="Modelo\MuestraDatos.cs" />
     <Compile Include="Modelo\RegistroBenchmark.cs" />
     <Compile Include="Vista\FrmMain.cs">
