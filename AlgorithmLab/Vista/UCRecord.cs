@@ -27,9 +27,10 @@ namespace AlgorithmLab.Vista
 
         private void RefrescarLista()
         {
+            lstHistorialRegistros.DisplayMember = "";
+
             lstHistorialRegistros.DataSource = null;
-            lstHistorialRegistros.DisplayMember = "NombreDescriptivo"; // Configura primero
-            lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros; // Asigna después
+            lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros;
         }
 
         private void lstHistorialRegistros_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,6 +68,7 @@ namespace AlgorithmLab.Vista
 
                 // Estilo para que se vea bien
                 dgvDetallesRegistro.AutoResizeColumns();
+                dgvDetallesRegistro.ClearSelection();
             }
         }
 
@@ -91,7 +93,7 @@ namespace AlgorithmLab.Vista
                     // 1. Encabezados
                     for (int i = 0; i < dgvDetallesRegistro.Columns.Count; i++)
                     {
-                        csv.Append(dgvDetallesRegistro.Columns[i].HeaderText + ",");
+                        csv.Append(dgvDetallesRegistro.Columns[i].HeaderText + ";");
                     }
                     csv.AppendLine();
 
@@ -103,12 +105,12 @@ namespace AlgorithmLab.Vista
                             // Manejo de nulos y comas en el texto
                             string valor = row.Cells[i].Value?.ToString() ?? "";
                             valor = valor.Replace(",", ";"); // Evitar romper el CSV
-                            csv.Append(valor + ",");
+                            csv.Append(valor + ";");
                         }
                         csv.AppendLine();
                     }
 
-                    File.WriteAllText(sfd.FileName, csv.ToString());
+                    File.WriteAllText(sfd.FileName, csv.ToString(), Encoding.UTF8);
                     MessageBox.Show("Archivo CSV generado exitosamente.");
                 }
                 catch (Exception ex)
@@ -132,6 +134,8 @@ namespace AlgorithmLab.Vista
                 RefrescarLista();
                 dgvDetallesRegistro.DataSource = null;
             }
+            dgvDetallesRegistro.DataSource = null;
+            this.Refresh();
         }
 
         private void UCRecord_Load(object sender, EventArgs e)
@@ -140,10 +144,11 @@ namespace AlgorithmLab.Vista
 
             lstHistorialRegistros.DataSource = null; // Limpiar enlace anterior
             lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros;
+        }
 
-            // Como tu clase RegistroBenchmark tiene un 'ToString()' personalizado, 
-            // no necesitas DisplayMember, pero si quieres asegurar:
-            // lstHistorialRegistros.DisplayMember = "Fecha";
+        private void dgvDetallesRegistro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

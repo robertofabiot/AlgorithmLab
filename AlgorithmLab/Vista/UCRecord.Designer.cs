@@ -75,6 +75,11 @@
             // 
             // dgvDetallesRegistro
             // 
+            this.dgvDetallesRegistro.AllowUserToAddRows = false;
+            this.dgvDetallesRegistro.AllowUserToDeleteRows = false;
+            this.dgvDetallesRegistro.AllowUserToResizeColumns = false;
+            this.dgvDetallesRegistro.AllowUserToResizeRows = false;
+            this.dgvDetallesRegistro.CausesValidation = false;
             this.dgvDetallesRegistro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetallesRegistro.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDetallesRegistro.Location = new System.Drawing.Point(588, 134);
@@ -83,6 +88,10 @@
             this.dgvDetallesRegistro.RowHeadersWidth = 51;
             this.tableLayoutPanel1.SetRowSpan(this.dgvDetallesRegistro, 3);
             this.dgvDetallesRegistro.RowTemplate.Height = 24;
+            this.dgvDetallesRegistro.ShowCellErrors = false;
+            this.dgvDetallesRegistro.ShowCellToolTips = false;
+            this.dgvDetallesRegistro.ShowEditingIcon = false;
+            this.dgvDetallesRegistro.ShowRowErrors = false;
             this.dgvDetallesRegistro.Size = new System.Drawing.Size(623, 352);
             this.dgvDetallesRegistro.TabIndex = 53;
             // 
