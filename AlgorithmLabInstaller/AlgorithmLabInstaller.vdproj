@@ -261,6 +261,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_E3A8787F01974590BE6F08280B7409AF"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_F457738850FB4A2DA42D598C055E2B6A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -297,8 +303,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FB63F243CFB84AF1BCA2E1F160A4EC17"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_FB5332E8538A0641741A2D0FDC68F51C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FB63F243CFB84AF1BCA2E1F160A4EC17"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -452,7 +470,7 @@
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.8"
                 "AllowLaterVersions" = "11:FALSE"
                 "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
                 }
@@ -934,6 +952,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E3A8787F01974590BE6F08280B7409AF"
+            {
+            "SourcePath" = "8:..\\AlgorithmLab\\bin\\x86\\Release\\x86\\libSkiaSharp.dll"
+            "TargetName" = "8:libSkiaSharp.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_87CB62E0ABCD448BB3685C6ADA18B717"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F457738850FB4A2DA42D598C055E2B6A"
             {
             "SourcePath" = "8:..\\AlgorithmLab\\Assets\\logo.png"
@@ -1016,6 +1054,37 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB63F243CFB84AF1BCA2E1F160A4EC17"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.ValueTuple, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_FB63F243CFB84AF1BCA2E1F160A4EC17"
+                    {
+                    "Name" = "8:System.ValueTuple.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\AlgorithmLab\\bin\\x86\\Release\\System.ValueTuple.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_87CB62E0ABCD448BB3685C6ADA18B717"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
         }
         "FileType"
         {
@@ -1084,7 +1153,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AlgorithmLab"
         "ProductCode" = "8:{26769FCA-34BC-43C3-9F70-9AF76A864702}"
-        "PackageCode" = "8:{E221D40F-4F12-4A4A-A53E-E54F1C763838}"
+        "PackageCode" = "8:{A3583986-01AC-4A3A-9901-D6CCF0101AAF}"
         "UpgradeCode" = "8:{D2EC3BFC-B116-404E-B7B0-726D8D70C60E}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -1633,7 +1702,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_101C1E6B502E4692BBE7169EBAFBB40D"
             {
-            "SourcePath" = "8:..\\AlgorithmLab\\obj\\Debug\\AlgorithmLab.exe"
+            "SourcePath" = "8:..\\AlgorithmLab\\obj\\x86\\Release\\AlgorithmLab.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_87CB62E0ABCD448BB3685C6ADA18B717"
