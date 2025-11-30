@@ -18,6 +18,7 @@ namespace AlgorithmLab
         public FrmMain()
         {
             InitializeComponent();
+            AlgorithmLab.Controlador.ContextoGlobal.CargarRegistrosDesdeDisco();
             ArrayNavigationButtons();
             var vistaOrdenamiento = new UCConfiguration();
             ChangeView(vistaOrdenamiento);

@@ -71,6 +71,7 @@
             this.tableLayoutPanel1.SetRowSpan(this.lstHistorialRegistros, 3);
             this.lstHistorialRegistros.Size = new System.Drawing.Size(221, 352);
             this.lstHistorialRegistros.TabIndex = 52;
+            this.lstHistorialRegistros.SelectedIndexChanged += new System.EventHandler(this.lstHistorialRegistros_SelectedIndexChanged);
             // 
             // dgvDetallesRegistro
             // 
@@ -100,6 +101,7 @@
             this.btnExportar.TabIndex = 54;
             this.btnExportar.Text = "Exportar";
             this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
             // btnLimpiarHistorial
             // 
@@ -116,6 +118,7 @@
             this.btnLimpiarHistorial.TabIndex = 55;
             this.btnLimpiarHistorial.Text = "Limpiar Historial";
             this.btnLimpiarHistorial.UseVisualStyleBackColor = false;
+            this.btnLimpiarHistorial.Click += new System.EventHandler(this.btnLimpiarHistorial_Click);
             // 
             // UCRecord
             // 
@@ -125,6 +128,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "UCRecord";
             this.Size = new System.Drawing.Size(1532, 620);
+            this.Load += new System.EventHandler(this.UCRecord_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetallesRegistro)).EndInit();
             this.ResumeLayout(false);

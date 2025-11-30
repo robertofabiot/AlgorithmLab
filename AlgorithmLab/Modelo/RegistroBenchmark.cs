@@ -19,5 +19,13 @@ namespace AlgorithmLab.Modelo
         public bool SeOrdenoPreviamente { get; set; }
         public string ValorBuscado { get; set; }
         public int IndiceEncontrado { get; set; }
+        public string NombreDescriptivo
+        {
+            get
+            {
+                // Formato: "Ordenamiento - Selection Sort (10:45:12)"
+                return $"{TipoOperacion} - {Algoritmo} ({Fecha:HH:mm:ss})";
+            }
+        }
     }
 }

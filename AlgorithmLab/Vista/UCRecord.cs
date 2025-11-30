@@ -1,9 +1,9 @@
 ﻿using AlgorithmLab.Controlador;
 using AlgorithmLab.Modelo;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace AlgorithmLab.Vista
@@ -13,26 +13,23 @@ namespace AlgorithmLab.Vista
         public UCRecord()
         {
             InitializeComponent();
-            // Configuración visual del DataGrid para que se vea bien
+            ConfigurarGrid();
+        }
+
+        private void ConfigurarGrid()
+        {
+            // Configuración visual para que se vea profesional
             dgvDetallesRegistro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDetallesRegistro.ReadOnly = true;
             dgvDetallesRegistro.AllowUserToAddRows = false;
-        }
-
-        // Se ejecuta cada vez que se muestra el control (si lo añades al Load en el Designer)
-        // O puedes llamarlo desde el constructor si prefieres.
-        private void UCRecord_Load(object sender, EventArgs e)
-        {
-            RefrescarLista();
+            dgvDetallesRegistro.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void RefrescarLista()
         {
-            ContextoGlobal.CargarRegistrosDesdeDisco();
-            lstHistorialRegistros.DataSource = null; // Reset
-            lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros;
-            // Usamos el ToString() override de la clase, o definimos una propiedad Display
-            // Pero como pusimos el override en el Modelo, se verá bonito automáticamente.
+            lstHistorialRegistros.DataSource = null;
+            lstHistorialRegistros.DisplayMember = "NombreDescriptivo"; // Configura primero
+            lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros; // Asigna después
         }
 
         private void lstHistorialRegistros_SelectedIndexChanged(object sender, EventArgs e)
@@ -40,25 +37,79 @@ namespace AlgorithmLab.Vista
             var seleccionado = lstHistorialRegistros.SelectedItem as RegistroBenchmark;
             if (seleccionado != null)
             {
-                // Mostramos todos los detalles en el Grid usando una lista de 1 elemento
-                // Esto es un truco rápido para mostrar las propiedades del objeto en columnas
-                dgvDetallesRegistro.DataSource = new List<RegistroBenchmark> { seleccionado };
+                // Configurar Grid para modo "Clave-Valor"
+                dgvDetallesRegistro.DataSource = null;
+                dgvDetallesRegistro.Columns.Clear();
+                dgvDetallesRegistro.Columns.Add("Campo", "Parámetro");
+                dgvDetallesRegistro.Columns.Add("Valor", "Valor");
+
+                // Llenar manualmente las filas
+                dgvDetallesRegistro.Rows.Add("ID", seleccionado.Id);
+                dgvDetallesRegistro.Rows.Add("Fecha", seleccionado.Fecha);
+                dgvDetallesRegistro.Rows.Add("Tipo Operación", seleccionado.TipoOperacion);
+                dgvDetallesRegistro.Rows.Add("Algoritmo", seleccionado.Algoritmo);
+                dgvDetallesRegistro.Rows.Add("Tamaño Muestra", seleccionado.TamanoMuestra);
+                dgvDetallesRegistro.Rows.Add("Tipo Dato", seleccionado.TipoDato);
+                dgvDetallesRegistro.Rows.Add("Tiempo", seleccionado.TiempoEjecucion);
+                dgvDetallesRegistro.Rows.Add("Memoria Pico", $"{seleccionado.MemoriaPicoBytes / 1024.0 / 1024.0:F2} MB");
+
+                if (seleccionado.TipoOperacion == "Ordenamiento")
+                {
+                    dgvDetallesRegistro.Rows.Add("Intercambios", seleccionado.Iteraciones);
+                }
+                else // Búsqueda
+                {
+                    dgvDetallesRegistro.Rows.Add("Valor Buscado", seleccionado.ValorBuscado);
+                    dgvDetallesRegistro.Rows.Add("Encontrado en Índice", seleccionado.IndiceEncontrado);
+                    dgvDetallesRegistro.Rows.Add("Iteraciones/Saltos", seleccionado.Iteraciones);
+                    dgvDetallesRegistro.Rows.Add("Incluyó Ordenamiento", seleccionado.SeOrdenoPreviamente ? "Sí" : "No");
+                }
+
+                // Estilo para que se vea bien
+                dgvDetallesRegistro.AutoResizeColumns();
             }
         }
 
         private void btnExportar_Click(object sender, EventArgs e)
         {
+            if (dgvDetallesRegistro.Rows.Count == 0)
+            {
+                MessageBox.Show("No hay datos para exportar.");
+                return;
+            }
+
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "JSON File|*.json|Text File|*.txt";
-            sfd.FileName = $"Reporte_AlgorithmLab_{DateTime.Now:yyyyMMdd}.json";
+            sfd.Filter = "CSV File|*.csv";
+            sfd.FileName = $"Reporte_{DateTime.Now:yyyyMMdd_HHmmss}.csv";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    string json = JsonConvert.SerializeObject(ContextoGlobal.HistorialRegistros, Formatting.Indented);
-                    File.WriteAllText(sfd.FileName, json);
-                    MessageBox.Show("Historial exportado correctamente.");
+                    StringBuilder csv = new StringBuilder();
+
+                    // 1. Encabezados
+                    for (int i = 0; i < dgvDetallesRegistro.Columns.Count; i++)
+                    {
+                        csv.Append(dgvDetallesRegistro.Columns[i].HeaderText + ",");
+                    }
+                    csv.AppendLine();
+
+                    // 2. Datos (Iteramos las filas del DataGrid)
+                    foreach (DataGridViewRow row in dgvDetallesRegistro.Rows)
+                    {
+                        for (int i = 0; i < dgvDetallesRegistro.Columns.Count; i++)
+                        {
+                            // Manejo de nulos y comas en el texto
+                            string valor = row.Cells[i].Value?.ToString() ?? "";
+                            valor = valor.Replace(",", ";"); // Evitar romper el CSV
+                            csv.Append(valor + ",");
+                        }
+                        csv.AppendLine();
+                    }
+
+                    File.WriteAllText(sfd.FileName, csv.ToString());
+                    MessageBox.Show("Archivo CSV generado exitosamente.");
                 }
                 catch (Exception ex)
                 {
@@ -69,21 +120,30 @@ namespace AlgorithmLab.Vista
 
         private void btnLimpiarHistorial_Click(object sender, EventArgs e)
         {
-            var resp = MessageBox.Show("¿Estás seguro de borrar todo el historial?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var resp = MessageBox.Show("¿Estás seguro de borrar todo el historial de forma permanente?",
+                                       "Confirmar Borrado",
+                                       MessageBoxButtons.YesNo,
+                                       MessageBoxIcon.Warning);
+
             if (resp == DialogResult.Yes)
             {
                 ContextoGlobal.HistorialRegistros.Clear();
-                ContextoGlobal.GuardarRegistrosEnDisco();
+                ContextoGlobal.GuardarRegistrosEnDisco(); // Guardar lista vacía limpia el archivo
                 RefrescarLista();
                 dgvDetallesRegistro.DataSource = null;
             }
         }
 
-        // Para asegurarnos de que cargue al cambiar de pestaña en el Main
-        protected override void OnVisibleChanged(EventArgs e)
+        private void UCRecord_Load(object sender, EventArgs e)
         {
-            base.OnVisibleChanged(e);
-            if (this.Visible) RefrescarLista();
+            ContextoGlobal.CargarRegistrosDesdeDisco();
+
+            lstHistorialRegistros.DataSource = null; // Limpiar enlace anterior
+            lstHistorialRegistros.DataSource = ContextoGlobal.HistorialRegistros;
+
+            // Como tu clase RegistroBenchmark tiene un 'ToString()' personalizado, 
+            // no necesitas DisplayMember, pero si quieres asegurar:
+            // lstHistorialRegistros.DisplayMember = "Fecha";
         }
     }
 }
