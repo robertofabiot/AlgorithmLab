@@ -36,3 +36,4 @@ Para más información sobre el análisis teórico, la implementación de los al
 
 ---
 *AlgorithmLab - Herramienta de Análisis Algorítmico.*
+*Paleta de colores: https://coolors.co/f1fffa-ccfccb-96e6b3-568259-464e47*
